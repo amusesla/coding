@@ -10,7 +10,8 @@ from django.http import HttpResponse, Http404, JsonResponse
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
-    return HttpResponse("<h1>WELCOME TO TWEET MAIN</h1>")
+    # return HttpResponse("<h1>WELCOME TO TWEET MAIN</h1>")
+    return render(request, "pages/home.html", context={}, status=200)
 
 
 # intro to dynamic ROUT URL
