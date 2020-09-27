@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from cloneTweet.views import home_view, tweet_detail_view
+from cloneTweet.views import home_view, tweet_detail_view, tweet_list_view
 
 
 urlpatterns = [
@@ -23,4 +23,5 @@ urlpatterns = [
     path("", home_view),
     # path("tweets/<int:num>/", dynamic_route_url_view),
     path("tweets/<int:tweet_id>/", tweet_detail_view),
+    path("tweets/", tweet_list_view),
 ]

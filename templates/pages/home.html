@@ -1,3 +1,47 @@
-{% extends 'pages/base.html' %} 'pages/base.html' %} {% block content %}
-<h1>This content is from home.html</h1>
+{% extends 'pages/base.html' %}
+<!---->
+
+{% block content %}
+<div class="text-center">
+	<h1>Content goes here</h1>
+</div>
+
+<div id="tweets"></div>
+<script>
+	const listDiv = document.getElementById('tweets');
+
+	function handleLike() {}
+
+	function btnLikes() {
+		ranNum = Math.floor(Math.random() * 321);
+		return `<button class='btn btn-primary btn-sm' onClick=handleLike>${ranNum}Like</button>`;
+	}
+
+	function makeListFormat(tweetList) {
+		return `<div class= 'p-3 border mb-4'><span class="d-block mb-3">${
+			tweetList.id
+		}, ${tweetList.content}</span>${btnLikes()}</div>`;
+	}
+
+	const xhr = new XMLHttpRequest();
+	const method = 'GET';
+	const url = 'tweets';
+	const responseType = 'json';
+
+	xhr.responseType = responseType;
+	xhr.open(method, url);
+	xhr.onload = function () {
+		let i = 0;
+		let finalList = '';
+		const serverResponse = xhr.response;
+		const tweetList = serverResponse.response;
+		for (i = 0; i < tweetList.length; i++) {
+			finalList += makeListFormat(tweetList[i]);
+		}
+		console.log(finalList);
+		listDiv.innerHTML = finalList;
+	};
+	xhr.send();
+</script>
+
 {% endblock content %}

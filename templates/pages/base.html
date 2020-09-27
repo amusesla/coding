@@ -19,8 +19,9 @@
 		<title>Hello, world!</title>
 	</head>
 	<body>
-		{% block content %} {% endblock content %}
-
+		{% include "pages/navBar.html" %}
+		<!---->
+		<div class="container">{% block content %} {% endblock content %}</div>
 		<!-- Optional JavaScript -->
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 		<script

@@ -32,7 +32,14 @@ def tweet_detail_view(request, tweet_id, *args, **kwargs):
         data["content"] = obj.content
         status = 200
     except:
-        data["message"] = "This id number doesn't exist"
+        data["message"] = "This id doesn't exist"
         status = 404
 
     return JsonResponse(data, status=status)
+
+
+def tweet_list_view(request, *args, **kwargs):
+    qs = Tweet.objects.all()
+    listTweet = [{"id": key.id, "content": key.content} for key in qs]
+    data = {"response": listTweet}
+    return JsonResponse(data)
