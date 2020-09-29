@@ -7,6 +7,8 @@ from .models import Tweet  # model class imported
 # Method Link
 from django.http import HttpResponse, Http404, JsonResponse
 
+# Form Link
+from .forms import TweetForm
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
@@ -43,3 +45,13 @@ def tweet_list_view(request, *args, **kwargs):
     listTweet = [{"id": key.id, "content": key.content} for key in qs]
     data = {"response": listTweet}
     return JsonResponse(data)
+
+
+def create_tweet_view(request, *args, **kwargs):
+    form = TweetForm(request.POST or None)
+    if form.is_valid():
+        obj = form.save()
+        # do other form related logic
+        obj.save()
+        form = TweetForm()
+    return render(request, "components/form.html", context={"form": form})
